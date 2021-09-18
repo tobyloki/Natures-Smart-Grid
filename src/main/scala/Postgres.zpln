@@ -1,0 +1,179 @@
+﻿{
+ "paragraphs": [
+  {
+   "text": "import org.apache.log4j.{Level, Logger}\nimport org.apache.spark.sql.{RuntimeConfig, SparkSession}\nimport org.apache.spark.sql.execution.ReuseSubquery.conf\n\nimport java.sql.DriverManager",
+   "user": "anonymous",
+   "dateUpdated": "2021-08-30T16:26:38-0700",
+   "progress": 0.0,
+   "config": {
+    "editorSetting": {
+     "language": "scala",
+     "editOnDblClick": false,
+     "completionKey": "TAB",
+     "completionSupport": true
+    },
+    "colWidth": 12.0,
+    "editorMode": "ace/mode/scala",
+    "fontSize": 9.0,
+    "results": {},
+    "enabled": true
+   },
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "import org.apache.log4j.{Level, Logger}\nimport org.apache.spark.sql.{RuntimeConfig, SparkSession}\nimport org.apache.spark.sql.execution.ReuseSubquery.conf\nimport java.sql.DriverManager\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1630365997954_663816284",
+   "id": "paragraph_1630365997954_663816284",
+   "dateCreated": "2021-08-30T16:26:37-0700",
+   "dateStarted": "2021-08-30T16:26:38-0700",
+   "dateFinished": "2021-08-30T16:26:40-0700",
+   "status": "FINISHED"
+  },
+  {
+   "text": "Logger.getLogger(\"org\").setLevel(Level.ERROR)\nprintln(\"Starting Spark session\")\nval spark = SparkSession.builder\n    .appName(\"SparkSQL\")\n    .master(\"local[*]\")\n    .getOrCreate()",
+   "user": "anonymous",
+   "dateUpdated": "2021-08-30T16:26:43-0700",
+   "progress": 0.0,
+   "config": {},
+   "settings": {
+    "params": {},
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "Starting Spark session\n\u001b[1m\u001b[34mspark\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.SparkSession\u001b[0m = org.apache.spark.sql.SparkSession@59500eb8\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1630366003051_1609936208",
+   "id": "paragraph_1630366003051_1609936208",
+   "dateCreated": "2021-08-30T16:26:43-0700",
+   "dateStarted": "2021-08-30T16:26:43-0700",
+   "dateFinished": "2021-08-30T16:26:46-0700",
+   "status": "FINISHED"
+  },
+  {
+   "text": "val conf: RuntimeConfig = spark.conf\n// Retrieve the JDBC configurations\nval jdbcUrl = \"jdbc:postgresql://localhost:5432/mydb\"\nval jdbcUser = \"postgres\"\nval jdbcPassword = \"password\"\n\n// Table to query\nval tableName = \"places\"\n\n// Tell spark which driver to use\nval driver = \"org.postgresql.Driver\"\n\nval query = s\"SELECT * FROM $tableName WHERE id < 100\"\nval df = spark\n\t.sqlContext\n\t.read\n\t.format(\"jdbc\")\n\t.option(\"driver\", driver)\n\t.option(\"url\", jdbcUrl)\n\t.option(\"user\", jdbcUser)\n\t.option(\"password\", jdbcPassword)\n\t.option(\"dbtable\", s\"($query) as t\")\n\t.load()",
+   "user": "anonymous",
+   "dateUpdated": "2021-08-30T16:27:15-0700",
+   "progress": 0.0,
+   "config": {},
+   "settings": {
+    "params": {
+     "bdtMeta": {
+      "inlay": {
+       "size": {
+        "height": 226.0
+       },
+       "state": {}
+      }
+     }
+    },
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "\u001b[1m\u001b[34mconf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.RuntimeConfig\u001b[0m = org.apache.spark.sql.RuntimeConfig@f3f9560\n\u001b[1m\u001b[34mjdbcUrl\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = jdbc:postgresql://localhost:5432/mydb\n\u001b[1m\u001b[34mjdbcUser\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = postgres\n\u001b[1m\u001b[34mjdbcPassword\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = password\n\u001b[1m\u001b[34mtableName\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = places\n\u001b[1m\u001b[34mdriver\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = org.postgresql.Driver\n\u001b[1m\u001b[34mquery\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m = SELECT * FROM places WHERE id < 100\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: int, lat: double ... 3 more fields]\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {},
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1630366035039_592859077",
+   "id": "paragraph_1630366035039_592859077",
+   "dateCreated": "2021-08-30T16:27:15-0700",
+   "dateStarted": "2021-08-30T16:27:15-0700",
+   "dateFinished": "2021-08-30T16:27:18-0700",
+   "status": "FINISHED"
+  },
+  {
+   "text": "df.show()",
+   "user": "anonymous",
+   "dateUpdated": "2021-08-30T16:27:21-0700",
+   "progress": 0.0,
+   "config": {
+    "results": [
+     {
+      "mode": "table"
+     }
+    ]
+   },
+   "settings": {
+    "params": {
+     "bdtMeta": {
+      "inlay": {
+       "state": {
+        "currentPage": "Table"
+       }
+      }
+     }
+    },
+    "forms": {}
+   },
+   "results": {
+    "code": "SUCCESS",
+    "msg": [
+     {
+      "type": "TEXT",
+      "data": "+---+---+---+------+-------+\n| id|lat|lng|  city|  state|\n+---+---+---+------+-------+\n|  1|0.5|0.6|mycity|mystate|\n+---+---+---+------+-------+\n\n"
+     }
+    ]
+   },
+   "apps": [],
+   "runtimeInfos": {
+    "jobUrl": {
+     "propertyName": "jobUrl",
+     "label": "SPARK JOB",
+     "tooltip": "View in Spark web UI",
+     "group": "spark",
+     "values": [
+      {
+       "jobUrl": "http://192.168.0.22:4040/jobs/job?id=0"
+      }
+     ],
+     "interpreterSettingId": "spark"
+    }
+   },
+   "progressUpdateIntervalMs": 500.0,
+   "jobName": "paragraph_1630366041106_762984622",
+   "id": "paragraph_1630366041106_762984622",
+   "dateCreated": "2021-08-30T16:27:21-0700",
+   "dateStarted": "2021-08-30T16:27:21-0700",
+   "dateFinished": "2021-08-30T16:27:27-0700",
+   "status": "FINISHED"
+  }
+ ],
+ "name": "Zeppelin Notebook",
+ "id": "",
+ "noteParams": {},
+ "noteForms": {},
+ "angularObjects": {},
+ "config": {
+  "isZeppelinNotebookCronEnable": false,
+  "looknfeel": "default",
+  "personalizedMode": "false"
+ },
+ "info": {}
+}
